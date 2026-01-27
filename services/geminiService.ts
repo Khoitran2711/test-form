@@ -1,14 +1,9 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const API_KEY = process.env.API_KEY || "";
-
-export const getGeminiResponse = async (userPrompt: string, history: {role: string, content: string}[] = []) => {
-  if (!API_KEY) {
-    throw new Error("API Key is missing. Please check your environment.");
-  }
-
-  const ai = new GoogleGenAI({ apiKey: API_KEY });
+export const getGeminiResponse = async (userPrompt: string) => {
+  // Luôn sử dụng process.env.API_KEY trực tiếp khi khởi tạo
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const systemInstruction = `
     Bạn là trợ lý ảo chính thức của Bệnh viện Đa khoa Tỉnh Ninh Thuận. 
@@ -38,6 +33,6 @@ export const getGeminiResponse = async (userPrompt: string, history: {role: stri
     return response.text || "Xin lỗi, tôi không thể xử lý yêu cầu lúc này.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Đã xảy ra lỗi khi kết nối với hệ thống trí tuệ nhân tạo. Vui lòng thử lại sau.";
+    return "Tính năng trợ lý AI hiện chưa khả dụng. Vui lòng gửi phản ánh qua biểu mẫu trực tiếp.";
   }
 };
