@@ -2,11 +2,14 @@
 import { HospitalDept, FeedbackType } from './types';
 
 export const HOSPITAL_NAME = "Bệnh viện Đa khoa Tỉnh Ninh Thuận";
-export const HOSPITAL_FULL_NAME = "Bệnh viện Đa khoa Tỉnh Ninh Thuận - Hạng I";
+export const BRANDING = {
+  logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Logo_BVDK_Ninh_Thuan.png/600px-Logo_BVDK_Ninh_Thuan.png",
+  heroImage: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2053",
+  slogan: "Tận tâm - Chất lượng - Văn minh - Hướng tới sự hài lòng của người bệnh"
+};
+
 export const ADDRESS = "Số 20 Nguyễn Văn Cừ, Phường Văn Hải, TP. Phan Rang - Tháp Chàm, Ninh Thuận";
 export const HOTLINE = "0259.3822.660";
-export const EMAIL = "bvdk@ninhthuan.gov.vn";
-export const WEBSITE = "https://bvdk.ninhthuan.gov.vn";
 
 export const DEPARTMENTS: HospitalDept[] = [
   { id: '1', name: 'Khoa Cấp cứu' },
@@ -16,11 +19,8 @@ export const DEPARTMENTS: HospitalDept[] = [
   { id: '5', name: 'Khoa Sản' },
   { id: '6', name: 'Khoa Nhi' },
   { id: '7', name: 'Khoa Hồi sức tích cực' },
-  { id: '8', name: 'Khoa Dược' },
   { id: '9', name: 'Khoa Mắt' },
-  { id: '10', name: 'Khoa Tai Mũi Họng' },
-  { id: '11', name: 'Phòng Điều dưỡng' },
-  { id: '12', name: 'Phòng Kế hoạch tổng hợp' }
+  { id: '10', name: 'Khoa Tai Mũi Họng' }
 ];
 
 export const MOCK_STATS = [
