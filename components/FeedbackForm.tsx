@@ -37,10 +37,8 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ isOpen, onClose }) => {
         status: 'pending'
       };
 
-      // Save to local storage
       const existingHistory = JSON.parse(localStorage.getItem('hospital_feedback_history') || '[]');
-      const updatedHistory = [newFeedback, ...existingHistory];
-      localStorage.setItem('hospital_feedback_history', JSON.stringify(updatedHistory));
+      localStorage.setItem('hospital_feedback_history', JSON.stringify([newFeedback, ...existingHistory]));
 
       setIsSubmitting(false);
       setShowSuccess(true);
@@ -57,73 +55,72 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-blue-900/60 backdrop-blur-sm animate-in fade-in duration-300" onClick={onClose}></div>
 
-      <div className="relative bg-white w-full max-w-xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+      <div className="relative bg-white w-full max-w-xl rounded-[3.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500 border-4 border-white">
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 z-20 w-10 h-10 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-full flex items-center justify-center transition-colors"
+          className="absolute top-6 right-8 z-20 w-10 h-10 bg-slate-50 hover:bg-slate-100 text-slate-400 rounded-full flex items-center justify-center transition-colors"
         >
           <i className="fas fa-times"></i>
         </button>
 
-        <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-8 py-10 text-white">
-          <h2 className="text-2xl font-black uppercase">Phiếu Ý Kiến Phản Ánh</h2>
-          <p className="text-blue-100 mt-1 opacity-80 font-medium">Ban Giám đốc sẽ tiếp nhận và xử lý ý kiến của bạn.</p>
+        <div className="bg-gradient-to-br from-blue-800 to-blue-600 px-10 py-12 text-white">
+          <h2 className="text-3xl font-black uppercase tracking-tight">Phiếu Ý Kiến</h2>
+          <p className="text-blue-100 mt-2 opacity-80 font-medium">Sự đóng góp của bạn giúp chúng tôi cải thiện chất lượng phục vụ.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8 space-y-5 max-h-[75vh] overflow-y-auto">
+        <form onSubmit={handleSubmit} className="p-10 space-y-6 max-h-[70vh] overflow-y-auto">
           {showSuccess ? (
-            <div className="text-center py-10 space-y-4">
-              <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-4xl">
-                <i className="fas fa-check-circle animate-pulse"></i>
+            <div className="text-center py-12 space-y-6">
+              <div className="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto text-4xl shadow-xl shadow-green-100">
+                <i className="fas fa-check animate-bounce"></i>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 tracking-tight">Gửi Thành Công!</h3>
-              <p className="text-gray-500 font-medium italic">Vui lòng vào tab "Tra cứu" để xem kết quả sau ít phút.</p>
+              <div className="space-y-2">
+                <h3 className="text-2xl font-black text-slate-800 uppercase tracking-tight">Gửi Thành Công!</h3>
+                <p className="text-slate-400 font-medium italic">Chúng tôi sẽ sớm phản hồi ý kiến của bạn.</p>
+              </div>
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Họ và tên</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">Họ và tên</label>
                   <input 
                     required type="text" 
-                    className="w-full px-5 py-3.5 rounded-2xl border-2 border-gray-50 focus:border-blue-500 outline-none transition-all bg-gray-50 font-medium"
+                    className="w-full px-7 py-4 rounded-2xl border-2 border-slate-50 focus:border-blue-500 outline-none transition-all bg-slate-50 font-bold text-sm shadow-inner"
                     placeholder="Nguyễn Văn A"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                   />
                 </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Số điện thoại</label>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">Số điện thoại</label>
                   <input 
                     required type="tel" 
-                    className="w-full px-5 py-3.5 rounded-2xl border-2 border-gray-50 focus:border-blue-500 outline-none transition-all bg-gray-50 font-medium"
-                    placeholder="0912345..."
+                    className="w-full px-7 py-4 rounded-2xl border-2 border-slate-50 focus:border-blue-500 outline-none transition-all bg-slate-50 font-bold text-sm shadow-inner"
+                    placeholder="0912..."
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Khoa/Phòng</label>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">Khoa/Phòng & Loại phản ánh</label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <select 
                     required
-                    className="w-full px-5 py-3.5 rounded-2xl border-2 border-gray-50 focus:border-blue-500 outline-none transition-all bg-gray-50 appearance-none font-medium cursor-pointer"
+                    className="w-full px-7 py-4 rounded-2xl border-2 border-slate-50 focus:border-blue-500 outline-none bg-slate-50 font-bold text-sm shadow-inner appearance-none cursor-pointer"
                     value={formData.dept}
                     onChange={(e) => setFormData({...formData, dept: e.target.value})}
                   >
-                    <option value="">-- Chọn Khoa --</option>
+                    <option value="">-- Khoa --</option>
                     {DEPARTMENTS.map(dept => (
                       <option key={dept.id} value={dept.name}>{dept.name}</option>
                     ))}
                   </select>
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Loại ý kiến</label>
                   <select 
                     required
-                    className="w-full px-5 py-3.5 rounded-2xl border-2 border-gray-50 focus:border-blue-500 outline-none transition-all bg-gray-50 appearance-none font-medium cursor-pointer"
+                    className="w-full px-7 py-4 rounded-2xl border-2 border-slate-50 focus:border-blue-500 outline-none bg-slate-50 font-bold text-sm shadow-inner appearance-none cursor-pointer"
                     value={formData.type}
                     onChange={(e) => setFormData({...formData, type: e.target.value as any})}
                   >
@@ -134,35 +131,27 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Chi tiết phản ánh</label>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">Nội dung chi tiết</label>
                 <textarea 
                   required rows={5}
-                  className="w-full px-5 py-3.5 rounded-2xl border-2 border-gray-50 focus:border-blue-500 outline-none transition-all bg-gray-50 resize-none font-medium"
-                  placeholder="Hãy mô tả rõ ràng sự việc để bệnh viện giải quyết chính xác nhất..."
+                  className="w-full px-7 py-4 rounded-[2rem] border-2 border-slate-50 focus:border-blue-500 outline-none transition-all bg-slate-50 resize-none font-bold text-sm shadow-inner"
+                  placeholder="Mô tả cụ thể sự việc..."
                   value={formData.content}
                   onChange={(e) => setFormData({...formData, content: e.target.value})}
                 ></textarea>
               </div>
 
-              <div className="pt-4 flex flex-col space-y-3">
+              <div className="pt-4 flex flex-col space-y-4">
                 <button 
                   disabled={isSubmitting}
                   type="submit" 
-                  className={`w-full py-5 rounded-2xl font-black text-lg text-white shadow-xl transition-all flex items-center justify-center space-x-3 group ${
-                    isSubmitting ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700 active:scale-95 shadow-blue-100'
+                  className={`w-full py-5 rounded-[1.5rem] font-black text-xs uppercase tracking-widest text-white shadow-2xl transition-all flex items-center justify-center space-x-3 ${
+                    isSubmitting ? 'bg-slate-300' : 'bg-blue-600 hover:bg-blue-700 shadow-blue-100 hover:scale-[1.02]'
                   }`}
                 >
-                  {isSubmitting ? (
-                    <i className="fas fa-circle-notch animate-spin"></i>
-                  ) : (
-                    <>
-                      <i className="fas fa-paper-plane group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                      <span>XÁC NHẬN GỬI Ý KIẾN</span>
-                    </>
-                  )}
+                  {isSubmitting ? <i className="fas fa-circle-notch animate-spin text-xl"></i> : <span>Xác nhận gửi thông tin</span>}
                 </button>
-                <p className="text-[10px] text-center text-gray-400 font-bold uppercase tracking-widest">Ban Giám đốc cam kết giữ bí mật thông tin người phản ánh</p>
               </div>
             </>
           )}
