@@ -1,0 +1,7 @@
+{
+  "name": "Ninh Thuan Hospital Patient Feedback Portal",
+  "description": "Hệ thống ghi nhận và xử lý ý kiến phản ánh của bệnh nhân tại Bệnh viện Đa khoa Tỉnh Ninh Thuận, tích hợp trí tuệ nhân tạo Gemini.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
