@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import FeedbackForm from './components/FeedbackForm';
-import AIAssistant from './components/AIAssistant';
-import AdminView from './components/AdminView';
-import Login from './components/Login';
-import { HOSPITAL_NAME, ADDRESS, HOTLINE } from './constants';
-import { Feedback } from './types';
+import Header from './components/Header.tsx';
+import FeedbackForm from './components/FeedbackForm.tsx';
+import AIAssistant from './components/AIAssistant.tsx';
+import AdminView from './components/AdminView.tsx';
+import Login from './components/Login.tsx';
+import { HOSPITAL_NAME, ADDRESS, HOTLINE } from './constants.ts';
+import { Feedback } from './types.ts';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'submit' | 'history'>('submit');
@@ -14,7 +14,6 @@ const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [history, setHistory] = useState<Feedback[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const savedHistory = localStorage.getItem('hospital_feedback_history');
@@ -22,7 +21,6 @@ const App: React.FC = () => {
       setHistory(JSON.parse(savedHistory));
     }
     
-    // Kiểm tra trạng thái đăng nhập đơn giản
     const auth = localStorage.getItem('hospital_admin_auth');
     if (auth === 'true') setIsLoggedIn(true);
   }, []);
